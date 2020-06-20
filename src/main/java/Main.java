@@ -74,6 +74,7 @@ public class Main {
         arrayListByAna.removeByIndex(3);
         System.out.println(arrayListByAna.toString());
         System.out.println(arrayListByAna.size());
-
+        ArrayListByAna arrayListByAna1 = new ArrayListByAna();
+        arrayListByAna1.size();
     }
 }

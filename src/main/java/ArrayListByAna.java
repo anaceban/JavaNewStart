@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 public class ArrayListByAna<E> {
-    private E[] elements;
+    private Object[] elements;
     private int size;
     private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
     private static final int DEFAULT_CAPACITY = 10;
@@ -13,24 +13,21 @@ public class ArrayListByAna<E> {
     protected transient int modCount = 0;
 
     public ArrayListByAna() {
-    }
-
-    public E[] getElements() {
-        return elements;
-    }
-
-    public void setElements(E[] elements) {
-        this.elements = elements;
-    }
-
-    public int size() {
-        return elements.length;
+        this.elements = (E[])DEFAULTCAPACITY_EMPTY_ELEMENTS;
     }
 
     public ArrayListByAna(E[] elements) {
         this.elements = elements;
     }
-
+    public E[] getElements() {
+        return (E[]) elements;
+    }
+    public int size() {
+        return elements.length;
+    }
+    public void setElements(E[] elements) {
+        this.elements = elements;
+    }
     private static int hugeCapacity(int minCapacity) {
         if (minCapacity < 0)
             throw new OutOfMemoryError();
