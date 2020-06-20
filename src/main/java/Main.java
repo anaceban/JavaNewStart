@@ -31,7 +31,17 @@ public class Main {
         StringBuilder stringBuilder = new StringBuilder(string);
         return stringBuilder.toString().replaceAll("[\\pP\\s]","").equalsIgnoreCase(stringBuilder.reverse().toString().replaceAll("[\\pP\\s]",""));
     }
-    //private  static final String INSERT_NEW = "insert into users values(?,?,?)";
+    public static int[] twoSumm(int[] array,int target) {
+        for (int j = 0; j < array.length; j++) {
+            for (int i = j+1; i < array.length; i++) {
+                if (array[j] + array[i] == target) {
+                    return new int[] {j,i};
+                }
+            }
+        }
+        return new int[]{};
+    }
+
     public static void main(String[] args) {
 
 //        Scanner scanner = new Scanner(System.in);
@@ -61,11 +71,9 @@ public class Main {
         arrayListByAna.add(new User("Vova"),2);
         arrayListByAna.add(new User("Tamila"));
         System.out.println(arrayListByAna.toString());
-        arrayListByAna.remove(arrayListByAna.getElement(3));
+        arrayListByAna.removeByIndex(3);
         System.out.println(arrayListByAna.toString());
-
-
-
+        System.out.println(arrayListByAna.size());
 
     }
 }

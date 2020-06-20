@@ -4,20 +4,22 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collection;
 
-public class ArrayListByAna {
-    private Object[] elements;
+public class ArrayListByAna<E> {
+    private E[] elements;
     private int size;
     private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
     private static final int DEFAULT_CAPACITY = 10;
     private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTS = {};
     protected transient int modCount = 0;
 
+    public ArrayListByAna() {
+    }
 
-    public Object[] getElements() {
+    public E[] getElements() {
         return elements;
     }
 
-    public void setElements(Object[] elements) {
+    public void setElements(E[] elements) {
         this.elements = elements;
     }
 
@@ -25,7 +27,7 @@ public class ArrayListByAna {
         return elements.length;
     }
 
-    public ArrayListByAna(Object[] elements) {
+    public ArrayListByAna(E[] elements) {
         this.elements = elements;
     }
 
@@ -65,27 +67,27 @@ public class ArrayListByAna {
         if (minCapacity - elements.length > 0)
             grow(minCapacity);
     }
-    private void fastRemove(int index) {
-        size = size();
-        modCount++;
-        int numMoved = size - index - 1;
-        if (numMoved > 0)
-            System.arraycopy(elements, index+1, elements, index,
-                    numMoved);
-        elements[--size] = null; // clear to let GC do its work
-    }
+//    private void fastRemove(int index) {
+//        size = size();
+//        modCount++;
+//        int numMoved = size - index - 1;
+//        if (numMoved > 0)
+//            System.arraycopy(elements, index+1, elements, index,
+//                    numMoved);
+//        elements[--size] = null; // clear to let GC do its work
+//    }
 
     public Object getElement(int index){
         return elements[index];
     }
 
-    public void add(Object o,int index) {
+    public void add(E o,int index) {
         if (size < index+1){
             grow(index+1);
         }
         elements[index]=o;
     }
-    public boolean add(Object o) {
+    public boolean add(E o) {
         size = size();
         ensureCapacityInternal(size + 1);  // Increments modCount!!
         elements[size++] = o;
@@ -93,20 +95,16 @@ public class ArrayListByAna {
     }
 
     public boolean remove(Object o) {
-        if (o == null) {
-            for (int index = 0; index < size; index++)
-                if (elements[index] == null) {
-                    fastRemove(index);
+        for (int index = 0; index < size; index++)
+            if (o.equals(elements[index])) {
+                elements[index] = null;
                     return true;
                 }
-        } else {
-            for (int index = 0; index < size; index++)
-                if (o.equals(elements[index])) {
-                    fastRemove(index);
-                    return true;
-                }
-        }
         return false;
+    }
+
+    public void removeByIndex(int index) {
+        elements[index] = null;
     }
 
         @Override
