@@ -10,10 +10,7 @@ import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.net.URI;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 import static jdk.nashorn.internal.objects.NativeArray.reverse;
 public class Main {
@@ -104,11 +101,19 @@ public class Main {
 //            System.out.print(array[i]+",");
 //        }
 //        System.out.println("\n"+ maxDiff(array));
-        ArrayListByAna<String> strings = new ArrayListByAna<>();
-        strings.add("Ana");
-        strings.add("A");
-        strings.removeByIndex(1);
+//        ArrayListByAna<String> strings = new ArrayListByAna<>();
+//        strings.add("Ana");
+//        strings.add("A");
+//        strings.removeByIndex(1);
        // strings.remove(0);
-        System.out.println(strings.size());
+       // System.out.println(strings.size());
+        LinkedListByAna<String> linkedList= new LinkedListByAna<>();
+        linkedList.add("Ana");
+        linkedList.add("Alex");
+        System.out.println(linkedList.size());
+        linkedList.remove("Ana");
+        System.out.println(linkedList.size());
+        System.out.println(linkedList.toString());
+
     }
 }
