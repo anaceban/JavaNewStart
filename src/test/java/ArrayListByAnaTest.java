@@ -42,4 +42,14 @@ public class ArrayListByAnaTest {
         assertEquals("2", list.getElement(0));
         assertEquals(2, list.size());
     }
+
+    @Test
+    public void shouldHaveNullElements(){
+        ArrayListByAna<String> arrayListByAna = new ArrayListByAna<>();
+        arrayListByAna.add(null);
+        arrayListByAna.add(null);
+        assertEquals(2,arrayListByAna.size());
+        arrayListByAna.removeByIndex(0);
+        assertEquals(1,arrayListByAna.size());
+    }
 }

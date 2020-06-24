@@ -119,9 +119,17 @@ public class ArrayListByAna<E> {
             }
             return false;
         }
-    public void removeByIndex(int index) {
-        elements[index] = null;
+    public E removeByIndex(int index) {
+        modCount++;
+        E oldValue = (E)elements[index];
+
+        int numMoved = size - index - 1;
+        if (numMoved > 0)
+            System.arraycopy(elements, index+1, elements, index,
+                    numMoved);
+        elements[--size] = null;
         trimToSize();
+        return oldValue;
     }
 
         @Override

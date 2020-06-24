@@ -104,10 +104,11 @@ public class Main {
 //            System.out.print(array[i]+",");
 //        }
 //        System.out.println("\n"+ maxDiff(array));
-        ArrayList<String> strings = new ArrayList<>();
+        ArrayListByAna<String> strings = new ArrayListByAna<>();
         strings.add("Ana");
         strings.add("A");
-        //strings.remove(1);
+        strings.removeByIndex(1);
+       // strings.remove(0);
         System.out.println(strings.size());
     }
 }
