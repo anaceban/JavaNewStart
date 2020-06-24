@@ -41,6 +41,27 @@ public class Main {
         }
         return new int[]{};
     }
+    public static void sort(int [] array){
+        for (int j=0; j<array.length; j++) {
+            int min = array[j];
+            int minIndex = j;
+            for (int i = j+1; i < array.length; i++) {
+                if (array[i] < min) {
+                    min = array[i];
+                    minIndex = i;
+                }
+            }
+            if(j != minIndex){
+               int tmp = array[j];
+               array[j] = array[minIndex];
+               array[minIndex] = tmp;
+            }
+        }
+    }
+
+    public static int maxDiff(int[] array){
+        return array[array.length-1] - array[0];
+    }
 
     public static void main(String[] args) {
 
@@ -71,10 +92,22 @@ public class Main {
         arrayListByAna.add(new User("Vova"),2);
         arrayListByAna.add(new User("Tamila"));
         System.out.println(arrayListByAna.toString());
-        arrayListByAna.removeByIndex(3);
+        arrayListByAna.remove(3);
         System.out.println(arrayListByAna.toString());
         System.out.println(arrayListByAna.size());
         ArrayListByAna arrayListByAna1 = new ArrayListByAna();
-        arrayListByAna1.size();
+        //arrayListByAna1.size();
+
+//        int [] array = {2,9,8,3,4,5,9};
+//        sort(array);
+//        for(int i=0; i<array.length; i++){
+//            System.out.print(array[i]+",");
+//        }
+//        System.out.println("\n"+ maxDiff(array));
+        ArrayList<String> strings = new ArrayList<>();
+        strings.add("Ana");
+        strings.add("A");
+        //strings.remove(1);
+        System.out.println(strings.size());
     }
 }

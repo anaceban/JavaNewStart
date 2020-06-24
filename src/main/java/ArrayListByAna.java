@@ -8,26 +8,32 @@ public class ArrayListByAna<E> {
     private Object[] elements;
     private int size;
     private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
-    private static final int DEFAULT_CAPACITY = 10;
+    private static final int DEFAULT_CAPACITY = 0;
     private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTS = {};
+    private static final Object[] EMPTY_ELEMENTDATA = {};
     protected transient int modCount = 0;
 
     public ArrayListByAna() {
-        this.elements = (E[])DEFAULTCAPACITY_EMPTY_ELEMENTS;
+        this.elements = (E[]) DEFAULTCAPACITY_EMPTY_ELEMENTS;
     }
 
     public ArrayListByAna(E[] elements) {
         this.elements = elements;
     }
+
     public E[] getElements() {
         return (E[]) elements;
     }
+
     public int size() {
-        return elements.length;
+        this.size = elements.length;
+        return size;
     }
+
     public void setElements(E[] elements) {
         this.elements = elements;
     }
+
     private static int hugeCapacity(int minCapacity) {
         if (minCapacity < 0)
             throw new OutOfMemoryError();
@@ -46,6 +52,7 @@ public class ArrayListByAna<E> {
             newCapacity = hugeCapacity(minCapacity);
         elements = Arrays.copyOf(elements, newCapacity);
     }
+
     private static int calculateCapacity(Object[] elementData, int minCapacity) {
         if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTS) {
             return Math.max(DEFAULT_CAPACITY, minCapacity);
@@ -64,44 +71,57 @@ public class ArrayListByAna<E> {
         if (minCapacity - elements.length > 0)
             grow(minCapacity);
     }
-//    private void fastRemove(int index) {
-//        size = size();
-//        modCount++;
-//        int numMoved = size - index - 1;
-//        if (numMoved > 0)
-//            System.arraycopy(elements, index+1, elements, index,
-//                    numMoved);
-//        elements[--size] = null; // clear to let GC do its work
-//    }
 
-    public Object getElement(int index){
+    private void fastRemove(int index) {
+        size = size();
+        modCount++;
+        int numMoved = size - index - 1;
+        if (numMoved > 0)
+            System.arraycopy(elements, index + 1, elements, index,
+                    numMoved);
+        elements[--size] = null; // clear to let GC do its work
+    }
+
+    public void trimToSize() {
+        modCount++;
+        if (size < elements.length) {
+            elements = (size == 0)
+                    ? EMPTY_ELEMENTDATA
+                    : Arrays.copyOf(elements, size);
+        }
+    }
+
+
+    public Object getElement(int index) {
         return elements[index];
     }
 
-    public void add(E o,int index) {
-        if (size < index+1){
-            grow(index+1);
+    public void add(E o, int index) {
+        if (size < index + 1) {
+            grow(index + 1);
         }
-        elements[index]=o;
+        elements[index] = o;
     }
+
     public boolean add(E o) {
-        size = size();
         ensureCapacityInternal(size + 1);  // Increments modCount!!
         elements[size++] = o;
         return true;
     }
 
     public boolean remove(Object o) {
+        size = size();
         for (int index = 0; index < size; index++)
             if (o.equals(elements[index])) {
-                elements[index] = null;
-                    return true;
-                }
-        return false;
-    }
-
+                fastRemove(index);
+                trimToSize();
+                return true;
+            }
+            return false;
+        }
     public void removeByIndex(int index) {
         elements[index] = null;
+        trimToSize();
     }
 
         @Override
